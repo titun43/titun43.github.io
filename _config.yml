@@ -1,0 +1,52 @@
+# GitHub Pages configuration for Lokhnath Technical website
+# https://titun43.github.io/
+
+title: Lokhnath Technical
+description: >-
+  Smart mobile apps for everyday India. Developer of Note Counter Pro
+  and ExamVault — free on Google Play.
+url: https://titun43.github.io
+baseurl: ""
+repository: titun43/titun43.github.io
+
+# SEO
+lang: en-IN
+author: Lokhnath Technical
+twitter:
+  username: lokhnathtech
+  card: summary_large_image
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Include only files we want served
+include:
+  - index.html
+  - privacy-policy.html
+  - robots.txt
+  - sitemap.xml
+  - app-ads.txt
+
+# Exclude build artifacts
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Disable Jekyll processing on .html files we author by hand
+keep_files: [assets]
+
+# Set timezone for date rendering
+timezone: Asia/Kolkata
