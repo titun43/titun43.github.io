@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokhnath Technical — Smart Apps for India</title>
+    <meta name="description" content="Lokhnath Technical makes smart mobile apps for India. Download Note Counter Pro & ExamVault — free on Google Play.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 50%, #1a0a0a 100%);
+            color: #f5e6d3;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #8B0000 0%, #A0522D 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.1"><path d="M0 0h60v60H0z"/><circle cx="30" cy="30" r="20"/></g></svg>');
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 800;
+            color: #D4AF37;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 50px;
+        }
+
+        /* App Cards */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .app-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139,0,0,0.4);
+            border-color: rgba(212,175,55,0.5);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .app-icon-note {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+        }
+
+        .app-icon-exam {
+            background: linear-gradient(135deg, #10B981, #059669);
+        }
+
+        .app-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .app-desc {
+            font-size: 15px;
+            color: rgba(245,230,211,0.7);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 75px;
+        }
+
+        .app-features {
+            text-align: left;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        .app-features li {
+            list-style: none;
+            padding: 6px 0;
+            font-size: 14px;
+            color: rgba(245,230,211,0.8);
+        }
+
+        .app-features li::before {
+            content: '✓ ';
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #D4AF37;
+            color: #1a0a0a;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+
+        .download-btn:hover {
+            background: #E6C757;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212,175,55,0.6);
+        }
+
+        .download-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #D4AF37;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(245,230,211,0.6);
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0,0,0,0.3);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(212,175,55,0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #E6C757;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: rgba(245,230,211,0.4);
+        }
+
+        .footer-heart {
+            color: #EF4444;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .logo { font-size: 32px; }
+            .tagline { font-size: 14px; }
+            .section-title { font-size: 24px; }
+            .apps-grid { grid-template-columns: 1fr; gap: 30px; }
+            .stats { gap: 30px; }
+            .stat-number { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">LT</div>
+        <div class="tagline">Lokhnath Technical — Making Smart Apps for India</div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <h2 class="section-title">Our Apps</h2>
+
+        <div class="apps-grid">
+            
+            <!-- Note Counter Pro -->
+            <div class="app-card">
+                <div class="app-icon app-icon-note">💵</div>
+                <h3 class="app-name">Note Counter Pro</h3>
+                <p class="app-desc">Fastest way to count cash notes. Multi-currency support with professional receipt generation.</p>
+                <ul class="app-features">
+                    <li>Multi-currency (INR, USD, EUR, GBP, BDT, NPR)</li>
+                    <li>Bahi Khata book with customer management</li>
+                    <li>PDF & Image receipt sharing</li>
+                    <li>Data backup & restore</li>
+                    <li>WhatsApp payment reminders</li>
+                    <li>Calculator with history</li>
+                </ul>
+                <a href="https://play.google.com/store/apps/details?id=com.lokhnathtechnical.notecounterpro" class="download-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.92 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+                    Download on Play Store
+                </a>
+            </div>
+
+            <!-- ExamVault -->
+            <div class="app-card">
+                <div class="app-icon app-icon-exam">📊</div>
+                <h3 class="app-name">ExamVault</h3>
+                <p class="app-desc">India's smartest MCQ Mock Test platform for competitive exam preparation. SSC, UPSC, APSC, ADRE & more.</p>
+                <ul class="app-features">
+                    <li>1000+ Mock Tests (SSC, UPSC, Banking, Railway)</li>
+                    <li>APSC, ADRE, Assam Police, TET — অসমীয়া ভাষা সমৰ্থিত</li>
+                    <li>Daily Quiz with streak tracking</li>
+                    <li>Previous Year Papers with solutions</li>
+                    <li>Leaderboard & Performance Analysis</li>
+                    <li>Current Affairs & Exam Notifications</li>
+                </ul>
+                <a href="https://play.google.com/store/apps/details?id=com.examvault.education" class="download-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.92 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
+                    Download on Play Store
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Apps Published</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6+</div>
+                <div class="stat-label">Currencies Supported</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Mock Tests</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free to Download</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:lkstudeoandcomputering@gmail.com">📧 Contact Us</a>
+            <a href="https://play.google.com/store/apps/dev?id=YOUR_DEVELOPER_ID" target="_blank">📱 All Apps</a>
+        </div>
+        <p class="footer-text">
+            © 2026 Lokhnath Technical. All rights reserved.<br>
+            Made with <span class="footer-heart">❤</span> in India
+        </p>
+    </footer>
+
+</body>
+</html>
