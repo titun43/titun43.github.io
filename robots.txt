@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lokhnathtechnical43.github.io/sitemap.xml
+Sitemap: https://titun43.github.io/sitemap.xml
