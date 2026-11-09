@@ -139,6 +139,40 @@ const I18N = {
   "about.label":  { en: "About Us", bn: "আমাদের সম্পর্কে", hi: "हमारे बारे में", as: "আমাৰ বিষয়ে" },
   "about.title":  { en: "Built with ❤️ in Assam, India", bn: "অসম, ভারতে ❤️ দিয়ে তৈরি", hi: "असम, भारत में ❤️ के साथ बनाया गया", as: "অসম, ভাৰতত ❤️ ৰে তৈয়াৰ" },
 
+  // ===== REVIEWS SECTION =====
+  "reviews.ratingText": {
+    en: "Real reviews from Google Play",
+    bn: "গুগল প্লে থেকে আসল রিভিউ",
+    hi: "गूगल प्ले से असली समीक्षाएं",
+    as: "গুগল প্লেৰ পৰা প্ৰকৃত ৰিভিউ"
+  },
+  "reviews.title": {
+    en: "What Our Users Say",
+    bn: "আমাদের ইউজাররা যা বলেন",
+    hi: "हमारे यूज़र क्या कहते हैं",
+    as: "আমাৰ ইউজাৰসকলে কি কয়"
+  },
+  "reviews.desc": {
+    en: "Honest feedback from real users who use our apps daily.",
+    bn: "প্রতিদিন আমাদের অ্যাপ ব্যবহারকারী আসল ইউজারদের সৎ মতামত।",
+    hi: "हर दिन हमारे ऐप इस्तेमाल करने वाले असली यूज़र्स की ईमानदार राय।",
+    as: "প্ৰতিদিন আমাৰ এপ্স ব্যৱহাৰকাৰী প্ৰকৃত ইউজাৰসকলৰ সৎ মতামত।"
+  },
+  "reviews.tabNcp": { en: "Note Counter Pro", bn: "নোট কাউন্টার প্রো", hi: "नोट काउंटर प्रो", as: "নোট কাউন্টাৰ প্ৰো" },
+  "reviews.tabExam": { en: "ExamVault", bn: "এক্সামভল্ট", hi: "एग्ज़ामवॉल्ट", as: "এক্সামভল্ট" },
+  "reviews.devReply": {
+    en: "Developer reply",
+    bn: "ডেভেলপারের উত্তর",
+    hi: "डेवलपर का जवाब",
+    as: "ডেভেলপাৰৰ উত্তৰ"
+  },
+  "reviews.viewAll": {
+    en: "View all reviews on Google Play",
+    bn: "গুগল প্লে-তে সব রিভিউ দেখুন",
+    hi: "गूगल प्ले पर सभी समीक्षाएं देखें",
+    as: "গুগল প্লে-ত সকলো ৰিভিউ চাওক"
+  },
+
   // ===== FOOTER =====
   "footer.desc":     {
     en: "Smart mobile apps for everyday India. Building tools that make life simpler, one app at a time.",
@@ -255,6 +289,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const lang = opt.getAttribute('data-lang');
         setLanguage(lang);
         langMenu.classList.remove('show');
+      });
+    });
+  }
+
+  // ===== REVIEWS TAB SWITCHING =====
+  const reviewTabs = document.querySelectorAll('.reviews-tab');
+  const reviewPanels = document.querySelectorAll('[data-reviews-panel]');
+  if (reviewTabs.length && reviewPanels.length) {
+    reviewTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-reviews-tab');
+        // Update tab active state
+        reviewTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // Show/hide panels
+        reviewPanels.forEach(panel => {
+          if (panel.getAttribute('data-reviews-panel') === target) {
+            panel.style.display = '';
+          } else {
+            panel.style.display = 'none';
+          }
+        });
       });
     });
   }

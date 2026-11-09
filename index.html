@@ -319,6 +319,77 @@
 
         /* ===== STATS ===== */
         .stats-section { background:var(--bg-mid); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:80px 24px; }
+
+        /* ===== REVIEWS SECTION ===== */
+        .reviews-section { padding:80px 24px; }
+        .reviews-header { text-align:center; margin-bottom:48px; }
+        .reviews-rating-badge {
+            display:inline-flex; align-items:center; gap:12px;
+            padding:12px 24px; background:var(--card-bg); border:1px solid var(--border-strong);
+            border-radius:50px; margin-bottom:20px;
+        }
+        .reviews-rating-number { font-size:28px; font-weight:800; color:var(--gold); }
+        .reviews-rating-stars { color:var(--gold); font-size:18px; letter-spacing:2px; }
+        .reviews-rating-text { font-size:14px; color:var(--text-muted); }
+        .reviews-apps-tabs {
+            display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+            margin-bottom:32px;
+        }
+        .reviews-tab {
+            padding:10px 20px; background:var(--card-bg); border:1px solid var(--border);
+            border-radius:50px; color:var(--text-muted); cursor:pointer;
+            font-size:14px; font-weight:600; transition:all 0.2s;
+            display:flex; align-items:center; gap:8px;
+        }
+        .reviews-tab:hover { border-color:var(--border-strong); color:var(--text); }
+        .reviews-tab.active { background:var(--gold); color:var(--bg); border-color:var(--gold); }
+        .reviews-tab-icon { width:20px; height:20px; border-radius:6px; background-size:cover; background-position:center; }
+        .reviews-grid {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:20px; max-width:1200px; margin:0 auto;
+        }
+        .review-card {
+            background:var(--card-bg); border:1px solid var(--border);
+            border-radius:16px; padding:24px; transition:all 0.3s;
+            display:flex; flex-direction:column;
+        }
+        .review-card:hover { border-color:var(--border-strong); transform:translateY(-4px); box-shadow:0 12px 32px var(--shadow); }
+        .review-header { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+        .review-avatar {
+            width:44px; height:44px; border-radius:50%;
+            background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+            display:flex; align-items:center; justify-content:center;
+            color:var(--bg); font-weight:700; font-size:18px; flex-shrink:0;
+        }
+        .review-author-info { flex:1; min-width:0; }
+        .review-author-name { font-size:15px; font-weight:700; color:var(--text); }
+        .review-date { font-size:12px; color:var(--text-faint); }
+        .review-rating { color:var(--gold); font-size:14px; letter-spacing:1px; margin-bottom:10px; }
+        .review-text {
+            font-size:14px; line-height:1.6; color:var(--text-muted);
+            margin-bottom:14px; flex:1;
+        }
+        .review-reply {
+            background:var(--surface); border-left:3px solid var(--gold);
+            border-radius:0 8px 8px 0; padding:12px 14px; margin-top:auto;
+        }
+        .review-reply-label {
+            font-size:11px; font-weight:700; color:var(--gold);
+            text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;
+        }
+        .review-reply-text { font-size:13px; line-height:1.5; color:var(--text-faint); }
+        .reviews-cta { text-align:center; margin-top:40px; }
+        .reviews-cta a {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:14px 32px; background:var(--gold); color:var(--bg);
+            text-decoration:none; border-radius:50px; font-weight:700; font-size:15px;
+            transition:all 0.3s;
+        }
+        .reviews-cta a:hover { transform:translateY(-2px); box-shadow:0 8px 24px var(--gold-shadow); }
+        @media (max-width:600px) {
+            .reviews-grid { grid-template-columns:1fr; }
+            .reviews-section { padding:60px 16px; }
+        }
         .stats-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px; text-align:center; }
         .stat-item { position:relative; }
         .stat-number { font-size:48px; font-weight:800; background:linear-gradient(135deg,var(--gold),var(--gold-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
@@ -540,6 +611,179 @@
             <div class="stat-item"><div class="stat-number">1000+</div><div class="stat-label">Mock Tests</div></div>
             <div class="stat-item"><div class="stat-number">20+</div><div class="stat-label">Exam Categories</div></div>
             <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Free to Download</div></div>
+        </div>
+    </section>
+
+    <!-- ===== USER REVIEWS ===== -->
+    <section class="reviews-section" id="reviews">
+        <div class="reviews-header">
+            <div class="reviews-rating-badge">
+                <span class="reviews-rating-number">5.0</span>
+                <span class="reviews-rating-stars">★★★★★</span>
+                <span class="reviews-rating-text" data-i18n="reviews.ratingText">Real reviews from Google Play</span>
+            </div>
+            <h2 class="section-title" data-i18n="reviews.title">What Our Users Say</h2>
+            <p class="section-desc" data-i18n="reviews.desc">Honest feedback from real users who use our apps daily.</p>
+        </div>
+
+        <div class="reviews-apps-tabs">
+            <button class="reviews-tab active" data-reviews-tab="ncp">
+                <span class="reviews-tab-icon" style="background-image:url('assets/note-counter-pro-icon.png');"></span>
+                <span data-i18n="reviews.tabNcp">Note Counter Pro</span>
+            </button>
+            <button class="reviews-tab" data-reviews-tab="exam">
+                <span class="reviews-tab-icon" style="background-image:url('assets/examvault-icon.png');"></span>
+                <span data-i18n="reviews.tabExam">ExamVault</span>
+            </button>
+        </div>
+
+        <!-- Note Counter Pro Reviews -->
+        <div class="reviews-grid" data-reviews-panel="ncp">
+            <!-- Review 1: Probir Das -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Probir Das</div>
+                        <div class="review-date">September 12, 2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Super Multi currency notes</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you so much Probir Das for your wonderful feedback and support! We're glad to know that the app and multi-currency feature are helping you. We'll keep working hard to bring even more improvements in the future. Stay with us! ❤️"</div>
+                </div>
+            </div>
+
+            <!-- Review 2: Mridul Das -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">M</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Mridul Das</div>
+                        <div class="review-date">October 11, 2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Update version bohot achcha</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you so much Mridul Das for your wonderful feedback and support! We're glad to know that the app and multi-currency feature are helping you. We'll keep working hard to bring even more improvements in the future. Stay with us! ❤️"</div>
+                </div>
+            </div>
+
+            <!-- Review 3: Pranoy Das -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Pranoy Das</div>
+                        <div class="review-date">October 12, 2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Use kore ভালো লাগলো, ভবিষ্যতে আরো অনেক কিছুর আশায় থাকলাম, এখন projonto akta app ♥️ পেলাম যেইটা কিনা multiple currency hisab+ খাতা menage করা যায়. Thank you</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you so much Pranoy Das for your wonderful feedback and support! We're glad to know that the app and multi-currency feature are helping you. We'll keep working hard to bring even more improvements in the future. Stay with us! ❤️"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ExamVault Reviews -->
+        <div class="reviews-grid" data-reviews-panel="exam" style="display:none;">
+            <!-- Review 1: Suman Das -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">S</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Suman Das</div>
+                        <div class="review-date">2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Good this app, no ads</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Hi Suman Das, thank you for your 5-star review! In our latest update of ExamVault, minimal ads were added to support app development and keep content free. You can still enjoy a 100% ad-free experience anytime by upgrading to our Premium plan. Thank you for your support and understanding!"</div>
+                </div>
+            </div>
+
+            <!-- Review 2: Nirmal Chanda -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">N</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Nirmal Chanda</div>
+                        <div class="review-date">2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">you need all exams question n answer is available here.</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you Nirmal Chanda for your wonderful 5-star review! We are glad you find our question-answer collection helpful. We are continuously adding more mock tests, upcoming exam updates, and daily current affairs to make your exam preparation even stronger. Best of luck with your exams!"</div>
+                </div>
+            </div>
+
+            <!-- Review 3: Bappy Shill -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">B</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Bappy Shill</div>
+                        <div class="review-date">2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">All exam best app. Thank You</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you Bappy Shill for your wonderful 5-star review! We are glad you find our question-answer collection helpful. We are continuously adding more mock tests, upcoming exam updates, and daily current affairs to make your exam preparation even stronger. Best of luck with your exams!"</div>
+                </div>
+            </div>
+
+            <!-- Review 4: Prasan Jit Das -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Prasan Jit Das</div>
+                        <div class="review-date">2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Excellent app for exam preparation with quality questions.</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you Prasan Jit Das for your wonderful 5-star review! We are glad you find our question-answer collection helpful. We are continuously adding more mock tests, upcoming exam updates, and daily current affairs to make your exam preparation even stronger. Best of luck with your exams!"</div>
+                </div>
+            </div>
+
+            <!-- Review 5: Probir Das (also reviewed ExamVault) -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">P</div>
+                    <div class="review-author-info">
+                        <div class="review-author-name">Probir Das</div>
+                        <div class="review-date">2026</div>
+                    </div>
+                </div>
+                <div class="review-rating">★★★★★</div>
+                <div class="review-text">Great app for mock tests and exam preparation.</div>
+                <div class="review-reply">
+                    <div class="review-reply-label" data-i18n="reviews.devReply">Developer reply</div>
+                    <div class="review-reply-text">"Thank you Probir Das for your wonderful 5-star review! We are glad you find our question-answer collection helpful. We are continuously adding more mock tests, upcoming exam updates, and daily current affairs to make your exam preparation even stronger. Best of luck with your exams!"</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-cta">
+            <a href="https://play.google.com/store/apps/developer?id=Lokhnath+Technical" target="_blank" rel="noopener">
+                <span data-i18n="reviews.viewAll">View all reviews on Google Play</span>
+                <span>→</span>
+            </a>
         </div>
     </section>
 
