@@ -8,63 +8,120 @@
     <link rel="icon" type="image/png" href="https://titun43.github.io/assets/lt-logo.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
+        :root,
+        [data-theme="dark"] {
             --maroon: #8B0000;
             --maroon-dark: #0d0505;
             --maroon-mid: #1a0a0a;
             --gold: #D4AF37;
             --cream: #F5E6D3;
             --border: rgba(212,175,55,0.15);
+            --bg: #0d0505;
+            --bg-mid: #1a0a0a;
+            --text: #F5E6D3;
+            --text-muted: rgba(245,230,211,0.6);
+            --text-faint: rgba(245,230,211,0.5);
+            --card-bg: rgba(255,255,255,0.03);
+            --shadow: rgba(0,0,0,0.5);
+            --gold-shadow: rgba(212,175,55,0.4);
+            --border-strong: rgba(212,175,55,0.3);
+            --nav-bg: rgba(13,5,5,0.85);
+        }
+        [data-theme="light"] {
+            --maroon: #8B0000;
+            --maroon-dark: #FFF8F0;
+            --maroon-mid: #FAF0E6;
+            --gold: #8B0000;
+            --cream: #1a0a0a;
+            --border: rgba(139,0,0,0.18);
+            --bg: #FFF8F0;
+            --bg-mid: #FAF0E6;
+            --text: #1a0a0a;
+            --text-muted: rgba(26,10,10,0.65);
+            --text-faint: rgba(26,10,10,0.55);
+            --card-bg: rgba(139,0,0,0.03);
+            --shadow: rgba(139,0,0,0.15);
+            --gold-shadow: rgba(139,0,0,0.25);
+            --border-strong: rgba(139,0,0,0.3);
+            --nav-bg: rgba(255,248,240,0.92);
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--maroon-dark);
-            color: var(--cream);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.7;
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .nav {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(13,5,5,0.85);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             padding: 16px 40px;
             display: flex; align-items: center; justify-content: space-between;
+            gap: 12px;
         }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-icon {
             width: 40px; height: 40px; border-radius: 50%;
             background: url('https://titun43.github.io/assets/lt-logo.png') center/cover no-repeat;
-            border: 1px solid rgba(212,175,55,0.3);
-            box-shadow: 0 4px 12px rgba(212,175,55,0.4);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 4px 12px var(--gold-shadow);
         }
-        .nav-logo-text { color: var(--cream); font-weight: 700; font-size: 18px; }
+        .nav-logo-text { color: var(--text); font-weight: 700; font-size: 18px; }
         .nav a.back-btn {
             color: var(--gold); text-decoration: none; font-weight: 600;
             padding: 8px 18px; border: 1px solid var(--gold); border-radius: 8px;
             transition: all 0.2s;
         }
-        .nav a.back-btn:hover { background: var(--gold); color: var(--maroon-dark); }
+        .nav a.back-btn:hover { background: var(--gold); color: var(--bg); }
+        .nav-actions { display:flex; gap:10px; align-items:center; }
+        .icon-btn {
+            background: var(--card-bg); border:1px solid var(--border-strong);
+            color: var(--gold); width:38px; height:38px; border-radius:50%;
+            cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;
+            transition: all 0.2s; padding:0;
+        }
+        .icon-btn:hover { background: var(--gold); color: var(--bg); }
+        .lang-wrap { position:relative; }
+        .lang-btn { display:flex; align-items:center; gap:6px; padding:0 10px; width:auto; }
+        .lang-btn-text { font-size:12px; font-weight:600; }
+        .lang-menu {
+            position:absolute; top:calc(100% + 8px); right:0;
+            background: var(--bg-mid); border:1px solid var(--border-strong);
+            border-radius:10px; padding:6px; min-width:160px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display:none; z-index:1000;
+        }
+        .lang-menu.show { display:block; }
+        .lang-option {
+            display:flex; align-items:center; gap:10px; padding:10px 12px;
+            cursor:pointer; border-radius:6px; color:var(--text);
+            font-size:14px; transition: background 0.2s;
+        }
+        .lang-option:hover { background: var(--card-bg); }
+        .lang-flag { font-size:18px; }
         .container { max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; }
         h1 {
             font-size: clamp(28px, 5vw, 44px);
-            background: linear-gradient(135deg, var(--gold), #F5E6D3);
+            background: linear-gradient(135deg, var(--gold), var(--text));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 8px;
         }
-        .last-updated { color: rgba(245,230,211,0.6); font-size: 14px; margin-bottom: 40px; }
+        .last-updated { color: var(--text-muted); font-size: 14px; margin-bottom: 40px; }
         h2 {
             color: var(--gold); font-size: 22px; margin-top: 40px; margin-bottom: 14px;
             padding-bottom: 8px; border-bottom: 1px solid var(--border);
         }
-        h3 { color: var(--cream); font-size: 17px; margin-top: 24px; margin-bottom: 10px; }
-        p { margin-bottom: 14px; color: rgba(245,230,211,0.9); }
+        h3 { color: var(--text); font-size: 17px; margin-top: 24px; margin-bottom: 10px; }
+        p { margin-bottom: 14px; color: var(--text); opacity: 0.9; }
         ul { margin: 14px 0 14px 24px; }
-        li { margin-bottom: 8px; color: rgba(245,230,211,0.9); }
+        li { margin-bottom: 8px; color: var(--text); opacity: 0.9; }
         a { color: var(--gold); }
         .card {
-            background: rgba(255,255,255,0.03);
+            background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 20px 24px;
@@ -72,7 +129,7 @@
         }
         .card-note {
             border-left: 3px solid var(--gold);
-            background: rgba(212,175,55,0.05);
+            background: var(--card-bg);
         }
         .card-warn {
             border-left: 3px solid #c0392b;
@@ -81,12 +138,13 @@
         .footer {
             text-align: center; padding: 40px 20px;
             border-top: 1px solid var(--border);
-            color: rgba(245,230,211,0.5); font-size: 14px;
+            color: var(--text-faint); font-size: 14px;
         }
         .footer a { color: var(--gold); text-decoration: none; }
         @media (max-width: 600px) {
-            .nav { padding: 14px 20px; }
+            .nav { padding: 14px 20px; flex-wrap: wrap; }
             .container { padding: 40px 16px 60px; }
+            .nav-logo-text { display: none; }
         }
     </style>
 </head>
@@ -97,12 +155,30 @@
         <div class="nav-logo-icon" role="img" aria-label="Lokhnath Technical logo"></div>
         <span class="nav-logo-text">Lokhnath Technical</span>
     </a>
-    <a href="https://titun43.github.io/" class="back-btn">← Back to Home</a>
+    <div class="nav-actions">
+        <div class="lang-wrap">
+            <button id="lang-toggle" class="icon-btn lang-btn" aria-label="Select language">
+                <span style="font-size:14px;">🌐</span>
+                <span class="lang-btn-text" id="lang-current-label">EN</span>
+                <span style="font-size:9px;">▼</span>
+            </button>
+            <div id="lang-menu" class="lang-menu">
+                <div class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span> English</div>
+                <div class="lang-option" data-lang="bn"><span class="lang-flag">🇧🇩</span> বাংলা</div>
+                <div class="lang-option" data-lang="hi"><span class="lang-flag">🇮🇳</span> हिन्दी</div>
+                <div class="lang-option" data-lang="as"><span class="lang-flag">🇮🇳</span> অসমীয়া</div>
+            </div>
+        </div>
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+            <span id="theme-icon">🌙</span>
+        </button>
+        <a href="https://titun43.github.io/" class="back-btn" data-i18n="nav.back">← Back to Home</a>
+    </div>
 </nav>
 
 <div class="container">
-    <h1>Terms of Service</h1>
-    <p class="last-updated">Last updated: 6 November 2026</p>
+    <h1 data-i18n="tos.title">Terms of Service</h1>
+    <p class="last-updated" data-i18n="tos.lastUpdated">Last updated: 6 November 2026</p>
 
     <p>Welcome to <strong>Lokhnath Technical</strong>. These Terms of Service ("Terms", "Agreement") govern your use of our mobile applications — <strong>Note Counter Pro</strong> and <strong>ExamVault</strong> — developed by Lokhnath Technical ("we", "us", or "our"). By downloading, installing, or using any of our apps, you agree to be bound by these Terms. If you do not agree with any part of these Terms, please do not download or use our apps.</p>
 
@@ -275,5 +351,6 @@
     <a href="https://titun43.github.io/">Home</a> · <a href="https://titun43.github.io/privacy-policy.html">Privacy Policy</a> · Terms of Service · <a href="mailto:lkstudeoandcomputering112@gmail.com">Contact</a>
 </footer>
 
+<script src="https://titun43.github.io/i18n.js"></script>
 </body>
 </html>

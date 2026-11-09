@@ -111,7 +111,9 @@
       gtag('config', 'G-XXXXXXXXXX');
     </script>
     <style>
-        :root {
+        /* ===== THEME VARIABLES (DARK = default) ===== */
+        :root,
+        [data-theme="dark"] {
             --maroon: #8B0000;
             --maroon-dark: #0d0505;
             --maroon-mid: #1a0a0a;
@@ -127,10 +129,43 @@
             --purple: #8B5CF6;
             --surface: rgba(255,255,255,0.04);
             --border: rgba(212,175,55,0.15);
+            --bg: #0d0505;
+            --bg-mid: #1a0a0a;
+            --text: #F5E6D3;
+            --text-muted: rgba(245,230,211,0.6);
+            --text-faint: rgba(245,230,211,0.5);
+            --card-bg: rgba(255,255,255,0.03);
+            --shadow: rgba(0,0,0,0.5);
+            --gold-shadow: rgba(212,175,55,0.4);
+            --border-strong: rgba(212,175,55,0.3);
+        }
+        /* ===== LIGHT MODE OVERRIDES ===== */
+        [data-theme="light"] {
+            --maroon: #8B0000;
+            --maroon-dark: #FFF8F0;
+            --maroon-mid: #FAF0E6;
+            --gold: #8B0000;
+            --gold-light: #A52A2A;
+            --gold-dark: #5a0000;
+            --cream: #1a0a0a;
+            --green: #047857;
+            --green-dark: #065F46;
+            --amber: #B45309;
+            --surface: rgba(139,0,0,0.04);
+            --border: rgba(139,0,0,0.18);
+            --bg: #FFF8F0;
+            --bg-mid: #FAF0E6;
+            --text: #1a0a0a;
+            --text-muted: rgba(26,10,10,0.65);
+            --text-faint: rgba(26,10,10,0.55);
+            --card-bg: rgba(139,0,0,0.03);
+            --shadow: rgba(139,0,0,0.15);
+            --gold-shadow: rgba(139,0,0,0.25);
+            --border-strong: rgba(139,0,0,0.3);
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
-        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--maroon-dark); color:var(--cream); line-height:1.6; overflow-x:hidden; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; transition: background 0.3s ease, color 0.3s ease; }
 
         /* ===== ANNOUNCEMENT BAR ===== */
         .announcement {
@@ -164,9 +199,38 @@
         .nav-logo-icon { width:44px; height:44px; border-radius:50%; background:url('assets/lt-logo.png') center/cover no-repeat; box-shadow:0 4px 12px rgba(212,175,55,0.4); border:1px solid rgba(212,175,55,0.3); }
         .nav-logo-text { font-size:18px; font-weight:700; color:var(--gold); }
         .nav-links { display:flex; gap:28px; align-items:center; }
-        .nav-links a { color:rgba(245,230,211,0.7); text-decoration:none; font-size:14px; font-weight:500; transition:color 0.3s; }
+        .nav-links a { color:var(--text-muted); text-decoration:none; font-size:14px; font-weight:500; transition:color 0.3s; }
         .nav-links a:hover { color:var(--gold); }
         @media(max-width:768px){ .nav-links{display:none;} }
+
+        /* ===== THEME + LANG TOGGLES ===== */
+        .nav-actions { display:flex; gap:12px; align-items:center; }
+        .icon-btn {
+            background: var(--card-bg); border:1px solid var(--border-strong);
+            color: var(--gold); width:40px; height:40px; border-radius:50%;
+            cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;
+            transition: all 0.2s; padding:0;
+        }
+        .icon-btn:hover { background: var(--gold); color: var(--bg); }
+        .lang-wrap { position:relative; }
+        .lang-btn { display:flex; align-items:center; gap:6px; padding:0 12px; }
+        .lang-btn-text { font-size:13px; font-weight:600; }
+        .lang-menu {
+            position:absolute; top:calc(100% + 8px); right:0;
+            background: var(--bg-mid); border:1px solid var(--border-strong);
+            border-radius:10px; padding:6px; min-width:160px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display:none; z-index:1000;
+        }
+        .lang-menu.show { display:block; }
+        .lang-option {
+            display:flex; align-items:center; gap:10px; padding:10px 12px;
+            cursor:pointer; border-radius:6px; color:var(--text);
+            font-size:14px; transition: background 0.2s;
+        }
+        .lang-option:hover { background: var(--card-bg); }
+        .lang-option.active { background: var(--card-bg); color:var(--gold); font-weight:600; }
+        .lang-flag { font-size:18px; }
 
         /* ===== HERO ===== */
         .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
@@ -317,13 +381,31 @@
                 <span class="nav-logo-text">Lokhnath Technical</span>
             </a>
             <div class="nav-links">
-                <a href="#apps">Apps</a>
-                <a href="#updates">Updates</a>
-                <a href="#exams">Exams</a>
-                <a href="#about">About</a>
-                <a href="privacy-policy.html">Privacy</a>
-                <a href="terms-of-service.html">Terms</a>
-                <a href="mailto:lkstudeoandcomputering112@gmail.com">Contact</a>
+                <a href="#apps" data-i18n="nav.apps">Apps</a>
+                <a href="#updates" data-i18n="nav.updates">Updates</a>
+                <a href="#exams" data-i18n="nav.exams">Exams</a>
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="privacy-policy.html" data-i18n="nav.privacy">Privacy</a>
+                <a href="terms-of-service.html" data-i18n="nav.terms">Terms</a>
+                <a href="mailto:lkstudeoandcomputering112@gmail.com" data-i18n="nav.contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="lang-wrap">
+                    <button id="lang-toggle" class="icon-btn lang-btn" aria-label="Select language">
+                        <span style="font-size:16px;">🌐</span>
+                        <span class="lang-btn-text" id="lang-current-label">EN</span>
+                        <span style="font-size:10px;">▼</span>
+                    </button>
+                    <div id="lang-menu" class="lang-menu">
+                        <div class="lang-option" data-lang="en"><span class="lang-flag">🇬🇧</span> English</div>
+                        <div class="lang-option" data-lang="bn"><span class="lang-flag">🇧🇩</span> বাংলা</div>
+                        <div class="lang-option" data-lang="hi"><span class="lang-flag">🇮🇳</span> हिन्दी</div>
+                        <div class="lang-option" data-lang="as"><span class="lang-flag">🇮🇳</span> অসমীয়া</div>
+                    </div>
+                </div>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <span id="theme-icon">🌙</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -334,17 +416,17 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="hero-badge-dot"></span>
-                2 Apps Live on Google Play
+                <span data-i18n="hero.badge">2 Apps Live on Google Play</span>
             </div>
-            <h1 class="hero-title">Smart Mobile Apps<br>for Everyday India</h1>
-            <p class="hero-subtitle">
+            <h1 class="hero-title"><span data-i18n="hero.title1">Smart Mobile Apps</span><br><span data-i18n="hero.title2">for Everyday India</span></h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
                 Lokhnath Technical builds fast, reliable, and beautifully designed mobile apps
                 that solve real problems. From counting cash and managing khata to cracking
                 competitive exams — we've got you covered, all in your own language.
             </p>
             <div class="hero-buttons">
-                <a href="#apps" class="btn btn-primary">Explore Our Apps</a>
-                <a href="#updates" class="btn btn-secondary">Latest Updates</a>
+                <a href="#apps" class="btn btn-primary" data-i18n="hero.explore">Explore Our Apps</a>
+                <a href="#updates" class="btn btn-secondary" data-i18n="hero.latest">Latest Updates</a>
             </div>
         </div>
         <div class="hero-poster">
@@ -357,8 +439,8 @@
         <div class="banner-card">
             <div class="banner-icon">🎨</div>
             <div class="banner-content">
-                <h3>Note Counter Pro v3.58.1 — Fresh New App Icon! <span class="banner-tag">NEW</span></h3>
-                <p>New cash counter machine icon, Google Play Billing 9.1.0 for IAP, 16 KB page size support, trader status declared, 8+ calculators, Smart Pay (UPI), Scan & Calculate (OCR), Reports dashboard, and Cloud Backup. Updated 8 November 2026.</p>
+                <h3><span data-i18n="banner.title">Note Counter Pro v3.58.1 — Fresh New App Icon!</span> <span class="banner-tag">NEW</span></h3>
+                <p data-i18n="banner.desc">New cash counter machine icon, Google Play Billing 9.1.0 for IAP, 16 KB page size support, trader status declared, 8+ calculators, Smart Pay (UPI), Scan & Calculate (OCR), Reports dashboard, and Cloud Backup. Updated 8 November 2026.</p>
             </div>
         </div>
     </div>
@@ -366,9 +448,9 @@
     <!-- ===== APPS ===== -->
     <section class="section" id="apps">
         <div class="section-header">
-            <div class="section-label">Our Products</div>
-            <h2 class="section-title">Powerful Apps, Zero Cost</h2>
-            <p class="section-desc">Two feature-rich apps designed to make your daily life easier — completely free to download.</p>
+            <div class="section-label" data-i18n="apps.label">Our Products</div>
+            <h2 class="section-title" data-i18n="apps.title">Powerful Apps, Zero Cost</h2>
+            <p class="section-desc" data-i18n="apps.desc">Two feature-rich apps designed to make your daily life easier — completely free to download.</p>
         </div>
 
         <div class="apps-grid">
@@ -376,35 +458,35 @@
             <div class="app-card">
                 <div class="app-card-header">
                     <div class="app-icon-large app-icon-note" role="img" aria-label="Note Counter Pro app icon"></div>
-                    <h3 class="app-name">Note Counter Pro</h3>
-                    <p class="app-tagline">Cash Counter & Bahi Khata</p>
+                    <h3 class="app-name" data-i18n="app.note.name">Note Counter Pro</h3>
+                    <p class="app-tagline" data-i18n="app.note.tagline">Cash Counter & Bahi Khata</p>
                     <div class="app-rating">
                         <span class="stars">★★★★★</span>
-                        <span class="rating-text">Free • 6+ Currencies</span>
+                        <span class="rating-text" data-i18n="app.note.rating">Free • 6+ Currencies</span>
                     </div>
                 </div>
                 <div class="app-body">
-                    <p class="app-desc">
+                    <p class="app-desc" data-i18n="app.note.desc">
                         The all-in-one cash management app for shopkeepers. Count cash notes instantly,
                         manage khata ledger, generate bills, send reminders, and access 8+ calculators
                         — with In-App Purchase premium upgrade.
                     </p>
                     <div class="features-list">
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">💱</div><span class="feature-text">Multi-currency note counter (INR + 6 world currencies)</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📖</div><span class="feature-text">Digital Khata ledger with udhaar tracking</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📄</div><span class="feature-text">Billing & invoice maker + PDF share</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">🧮</div><span class="feature-text">8+ calculators (GST, EMI, Scientific, Programmer, Date)</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📸</div><span class="feature-text">Scan & Calculate — handwritten bill OCR</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📲</div><span class="feature-text">Smart Pay — UPI QR scan, generate, send money</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📊</div><span class="feature-text">Reports dashboard + smart insights</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">☁️</div><span class="feature-text">Google Drive cloud backup & restore</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">💬</div><span class="feature-text">WhatsApp payment reminders + Refer & Earn</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">🔐</div><span class="feature-text">App Lock (biometric) + Premium IAP upgrade</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">💱</div><span class="feature-text" data-i18n="app.note.f1">Multi-currency note counter (INR + 6 world currencies)</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📖</div><span class="feature-text" data-i18n="app.note.f2">Digital Khata ledger with udhaar tracking</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📄</div><span class="feature-text" data-i18n="app.note.f3">Billing & invoice maker + PDF share</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">🧮</div><span class="feature-text" data-i18n="app.note.f4">8+ calculators (GST, EMI, Scientific, Programmer, Date)</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📸</div><span class="feature-text" data-i18n="app.note.f5">Scan & Calculate — handwritten bill OCR</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📲</div><span class="feature-text" data-i18n="app.note.f6">Smart Pay — UPI QR scan, generate, send money</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📊</div><span class="feature-text" data-i18n="app.note.f7">Reports dashboard + smart insights</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">☁️</div><span class="feature-text" data-i18n="app.note.f8">Google Drive cloud backup & restore</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">💬</div><span class="feature-text" data-i18n="app.note.f9">WhatsApp payment reminders + Refer & Earn</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">🔐</div><span class="feature-text" data-i18n="app.note.f10">App Lock (biometric) + Premium IAP upgrade</span></div>
                     </div>
                     <div class="app-download">
                         <a href="https://play.google.com/store/apps/details?id=com.lokhnathtechnical.notecounterpro" target="_blank" class="download-btn">
                             <svg viewBox="0 0 24 24"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.92 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
-                            Download
+                            <span data-i18n="app.download">Download</span>
                         </a>
                     </div>
                 </div>
@@ -414,33 +496,33 @@
             <div class="app-card">
                 <div class="app-card-header">
                     <div class="app-icon-large app-icon-exam" role="img" aria-label="ExamVault app icon"></div>
-                    <h3 class="app-name">ExamVault</h3>
-                    <p class="app-tagline">Mock Test App for Indian Exams</p>
+                    <h3 class="app-name" data-i18n="app.exam.name">ExamVault</h3>
+                    <p class="app-tagline" data-i18n="app.exam.tagline">Mock Test App for Indian Exams</p>
                     <div class="app-rating">
                         <span class="stars">★★★★★</span>
-                        <span class="rating-text">Free • SSC, UPSC, APSC, ADRE, Banking</span>
+                        <span class="rating-text" data-i18n="app.exam.rating">Free • SSC, UPSC, APSC, ADRE, Banking</span>
                     </div>
                 </div>
                 <div class="app-body">
-                    <p class="app-desc">
+                    <p class="app-desc" data-i18n="app.exam.desc">
                         Independent educational practice app for Indian competitive exams.
                         Mock tests for SSC, UPSC, APSC, ADRE, Railway, Banking & state exams —
                         with daily quizzes, leaderboard, and bilingual support (English + অসমীয়া).
                     </p>
                     <div class="features-list">
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📝</div><span class="feature-text">1000+ Mock Tests (SSC, UPSC, Banking, Railway)</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🅰️</div><span class="feature-text">APSC, ADRE, TET — অসমীয়া ভাষা সমৰ্থিত</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📅</div><span class="feature-text">Daily Quiz with streak tracking</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🏆</div><span class="feature-text">Leaderboard & Performance Analysis</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📰</div><span class="feature-text">Current Affairs & Government Source links</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔔</div><span class="feature-text">Exam notifications & announcements</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔍</div><span class="feature-text">Search tests by exam, subject, language</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">💎</div><span class="feature-text">Premium: Ad-free + Unlimited mock tests</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📝</div><span class="feature-text" data-i18n="app.exam.f1">1000+ Mock Tests (SSC, UPSC, Banking, Railway)</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🅰️</div><span class="feature-text" data-i18n="app.exam.f2">APSC, ADRE, TET — অসমীয়া ভাষা সমৰ্থিত</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📅</div><span class="feature-text" data-i18n="app.exam.f3">Daily Quiz with streak tracking</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🏆</div><span class="feature-text" data-i18n="app.exam.f4">Leaderboard & Performance Analysis</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📰</div><span class="feature-text" data-i18n="app.exam.f5">Current Affairs & Government Source links</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔔</div><span class="feature-text" data-i18n="app.exam.f6">Exam notifications & announcements</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔍</div><span class="feature-text" data-i18n="app.exam.f7">Search tests by exam, subject, language</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">💎</div><span class="feature-text" data-i18n="app.exam.f8">Premium: Ad-free + Unlimited mock tests</span></div>
                     </div>
                     <div class="app-download">
                         <a href="https://play.google.com/store/apps/details?id=com.examvault.education" target="_blank" class="download-btn">
                             <svg viewBox="0 0 24 24"><path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12M20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.92 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/></svg>
-                            Download
+                            <span data-i18n="app.download">Download</span>
                         </a>
                     </div>
                 </div>
@@ -462,58 +544,58 @@
     <!-- ===== ANNOUNCEMENTS / UPDATES ===== -->
     <section class="section" id="updates">
         <div class="section-header">
-            <div class="section-label">What's New</div>
-            <h2 class="section-title">Latest Updates & Announcements</h2>
-            <p class="section-desc">Stay up to date with the latest features, bug fixes, and improvements across our apps.</p>
+            <div class="section-label" data-i18n="updates.label">What's New</div>
+            <h2 class="section-title" data-i18n="updates.title">Latest Updates & Announcements</h2>
+            <p class="section-desc" data-i18n="updates.desc">Stay up to date with the latest features, bug fixes, and improvements across our apps.</p>
         </div>
 
         <div class="announcements-list">
             <div class="announcement-item">
                 <div class="announcement-type type-new">🎨</div>
                 <div class="announcement-info">
-                    <h4>Note Counter Pro v3.58.1 — New App Icon & IAP Live</h4>
-                    <p>Fresh cash counter machine icon, Google Play Billing 9.1.0 (Play Store policy compliant), 16 KB page size support, trader status declared, 3-language Play Store listing (en/bn/hi).</p>
-                    <div class="announcement-date">Nov 8, 2026</div>
+                    <h4 data-i18n="upd.1.title">Note Counter Pro v3.58.1 — New App Icon & IAP Live</h4>
+                    <p data-i18n="upd.1.desc">Fresh cash counter machine icon, Google Play Billing 9.1.0 (Play Store policy compliant), 16 KB page size support, trader status declared, 3-language Play Store listing (en/bn/hi).</p>
+                    <div class="announcement-date" data-i18n="upd.1.date">Nov 8, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-update">📱</div>
                 <div class="announcement-info">
-                    <h4>ExamVault v1.62.3 — Target API 36 + Billing 8.1.0</h4>
-                    <p>Android 16 (API 36) compliance, Google Play Billing Library 8.1.0 for policy compliance, in-app update system with hybrid approach, splash screen disclaimer, government sources screen.</p>
-                    <div class="announcement-date">Nov 8, 2026</div>
+                    <h4 data-i18n="upd.2.title">ExamVault v1.62.3 — Target API 36 + Billing 8.1.0</h4>
+                    <p data-i18n="upd.2.desc">Android 16 (API 36) compliance, Google Play Billing Library 8.1.0 for policy compliance, in-app update system with hybrid approach, splash screen disclaimer, government sources screen.</p>
+                    <div class="announcement-date" data-i18n="upd.2.date">Nov 8, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-feature">📊</div>
                 <div class="announcement-info">
-                    <h4>Note Counter Pro v3.54 — Reports Dashboard + Smart Insights</h4>
-                    <p>Reports dashboard with weekly charts, smart insights, Backup Pro templates, professional dialog redesign, WhatsApp sharing + onboarding welcome flow.</p>
-                    <div class="announcement-date">Nov 4, 2026</div>
+                    <h4 data-i18n="upd.3.title">Note Counter Pro v3.54 — Reports Dashboard + Smart Insights</h4>
+                    <p data-i18n="upd.3.desc">Reports dashboard with weekly charts, smart insights, Backup Pro templates, professional dialog redesign, WhatsApp sharing + onboarding welcome flow.</p>
+                    <div class="announcement-date" data-i18n="upd.3.date">Nov 4, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-feature">📸</div>
                 <div class="announcement-info">
-                    <h4>Scan & Calculate — Cloud Vision OCR</h4>
-                    <p>Handwritten bill OCR with 95% accuracy using Google ML Kit. Scan a bill, automatically extract denominations, edit and add manual entries, get column sum.</p>
-                    <div class="announcement-date">Oct 28, 2026</div>
+                    <h4 data-i18n="upd.4.title">Scan & Calculate — Cloud Vision OCR</h4>
+                    <p data-i18n="upd.4.desc">Handwritten bill OCR with 95% accuracy using Google ML Kit. Scan a bill, automatically extract denominations, edit and add manual entries, get column sum.</p>
+                    <div class="announcement-date" data-i18n="upd.4.date">Oct 28, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-update">📲</div>
                 <div class="announcement-info">
-                    <h4>Smart Pay — UPI QR Tools</h4>
-                    <p>UPI QR scanner, QR generator, send money screen, saved UPI IDs. Scan merchant QR to extract UPI ID and send up to ₹1,00,000 (vs ₹2,000 gallery limit).</p>
-                    <div class="announcement-date">Oct 22, 2026</div>
+                    <h4 data-i18n="upd.5.title">Smart Pay — UPI QR Tools</h4>
+                    <p data-i18n="upd.5.desc">UPI QR scanner, QR generator, send money screen, saved UPI IDs. Scan merchant QR to extract UPI ID and send up to ₹1,00,000 (vs ₹2,000 gallery limit).</p>
+                    <div class="announcement-date" data-i18n="upd.5.date">Oct 22, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-update">🧮</div>
                 <div class="announcement-info">
-                    <h4>Calculator Suite — 8+ Calculators</h4>
-                    <p>Standard, Scientific, Programmer, Date, GST, EMI, Currency Converter — all in one Tools tab. Live result preview + bigger buttons + trailing operator fix.</p>
-                    <div class="announcement-date">Oct 18, 2026</div>
+                    <h4 data-i18n="upd.6.title">Calculator Suite — 8+ Calculators</h4>
+                    <p data-i18n="upd.6.desc">Standard, Scientific, Programmer, Date, GST, EMI, Currency Converter — all in one Tools tab. Live result preview + bigger buttons + trailing operator fix.</p>
+                    <div class="announcement-date" data-i18n="upd.6.date">Oct 18, 2026</div>
                 </div>
             </div>
         </div>
@@ -522,9 +604,9 @@
     <!-- ===== EXAMS COVERED ===== -->
     <section class="section" id="exams">
         <div class="section-header">
-            <div class="section-label">ExamVault Coverage</div>
-            <h2 class="section-title">Exams We Cover</h2>
-            <p class="section-desc">20+ competitive exam categories with 1000+ mock tests, daily quizzes, and previous year papers.</p>
+            <div class="section-label" data-i18n="exams.label">ExamVault Coverage</div>
+            <h2 class="section-title" data-i18n="exams.title">Exams We Cover</h2>
+            <p class="section-desc" data-i18n="exams.desc">20+ competitive exam categories with 1000+ mock tests, daily quizzes, and previous year papers.</p>
         </div>
 
         <div class="exam-grid">
@@ -580,28 +662,29 @@
                     <div class="nav-logo-icon" role="img" aria-label="Lokhnath Technical logo"></div>
                     <span class="nav-logo-text">Lokhnath Technical</span>
                 </div>
-                <p>Smart mobile apps for everyday India. Building tools that make life simpler, one app at a time.</p>
+                <p data-i18n="footer.desc">Smart mobile apps for everyday India. Building tools that make life simpler, one app at a time.</p>
             </div>
             <div class="footer-col">
-                <h4>Apps</h4>
+                <h4 data-i18n="footer.apps">Apps</h4>
                 <a href="https://play.google.com/store/apps/details?id=com.lokhnathtechnical.notecounterpro" target="_blank">Note Counter Pro</a>
                 <a href="https://play.google.com/store/apps/details?id=com.examvault.education" target="_blank">ExamVault</a>
             </div>
             <div class="footer-col">
-                <h4>Company</h4>
-                <a href="#about">About Us</a>
-                <a href="#updates">Latest Updates</a>
-                <a href="#exams">Exams Covered</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms-of-service.html">Terms of Service</a>
-                <a href="mailto:lkstudeoandcomputering112@gmail.com">Contact</a>
+                <h4 data-i18n="footer.company">Company</h4>
+                <a href="#about" data-i18n="nav.about">About Us</a>
+                <a href="#updates" data-i18n="nav.updates">Latest Updates</a>
+                <a href="#exams" data-i18n="nav.exams">Exams Covered</a>
+                <a href="privacy-policy.html" data-i18n="nav.privacy">Privacy Policy</a>
+                <a href="terms-of-service.html" data-i18n="nav.terms">Terms of Service</a>
+                <a href="mailto:lkstudeoandcomputering112@gmail.com" data-i18n="nav.contact">Contact</a>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 Lokhnath Technical. All rights reserved.<br>
-            Made with <span class="footer-heart">❤</span> in India
+            <span data-i18n="footer.copyright">© 2026 Lokhnath Technical. All rights reserved.</span><br>
+            <span data-i18n="footer.made">Made with</span> <span class="footer-heart">❤</span> <span data-i18n="footer.india">in India</span>
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
 </body>
 </html>
