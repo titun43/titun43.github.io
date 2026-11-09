@@ -230,9 +230,9 @@
         .app-card:hover { transform:translateY(-12px); border-color:rgba(212,175,55,0.4); box-shadow:0 20px 60px rgba(0,0,0,0.5); }
         .app-card:hover::before { opacity:1; }
         .app-card-header { padding:40px 32px 24px; text-align:center; }
-        .app-icon-large { width:120px; height:120px; border-radius:28px; margin:0 auto 24px; display:flex; align-items:center; justify-content:center; font-size:56px; box-shadow:0 12px 32px rgba(0,0,0,0.3); }
-        .app-icon-note { background:linear-gradient(135deg,var(--amber),var(--gold-dark)); }
-        .app-icon-exam { background:linear-gradient(135deg,var(--green),var(--green-dark)); }
+        .app-icon-large { width:120px; height:120px; border-radius:28px; margin:0 auto 24px; display:flex; align-items:center; justify-content:center; font-size:56px; box-shadow:0 12px 32px rgba(0,0,0,0.3); overflow:hidden; background-size:cover; background-position:center; background-repeat:no-repeat; }
+        .app-icon-note { background-image:url('assets/note-counter-pro-icon.png'); background-color:var(--amber); }
+        .app-icon-exam { background-image:url('assets/examvault-icon.png'); background-color:var(--green-dark); }
         .app-name { font-size:28px; font-weight:800; color:#fff; margin-bottom:8px; }
         .app-tagline { font-size:15px; color:rgba(245,230,211,0.5); }
         .app-rating { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:12px; }
@@ -339,8 +339,8 @@
             <h1 class="hero-title">Smart Mobile Apps<br>for Everyday India</h1>
             <p class="hero-subtitle">
                 Lokhnath Technical builds fast, reliable, and beautifully designed mobile apps
-                that solve real problems. From counting cash to cracking competitive exams —
-                we've got you covered.
+                that solve real problems. From counting cash and managing khata to cracking
+                competitive exams — we've got you covered, all in your own language.
             </p>
             <div class="hero-buttons">
                 <a href="#apps" class="btn btn-primary">Explore Our Apps</a>
@@ -355,10 +355,10 @@
     <!-- ===== LIVE BANNER ===== -->
     <div class="live-banner">
         <div class="banner-card">
-            <div class="banner-icon">🚀</div>
+            <div class="banner-icon">🎨</div>
             <div class="banner-content">
-                <h3>ExamVault — Now with Real Ads & In-App Updates <span class="banner-tag">NEW</span></h3>
-                <p>Version 1.56 is live! Real AdMob ads, premium ad-free experience, in-app update system, and comprehensive Assam exam data (APSC, ADRE, TET, Police, Forest, CGL).</p>
+                <h3>Note Counter Pro v3.58.1 — Fresh New App Icon! <span class="banner-tag">NEW</span></h3>
+                <p>New cash counter machine icon, Google Play Billing 9.1.0 for IAP, 16 KB page size support, trader status declared, 8+ calculators, Smart Pay (UPI), Scan & Calculate (OCR), Reports dashboard, and Cloud Backup. Updated 8 November 2026.</p>
             </div>
         </div>
     </div>
@@ -375,7 +375,7 @@
             <!-- Note Counter Pro -->
             <div class="app-card">
                 <div class="app-card-header">
-                    <div class="app-icon-large app-icon-note">💵</div>
+                    <div class="app-icon-large app-icon-note" role="img" aria-label="Note Counter Pro app icon"></div>
                     <h3 class="app-name">Note Counter Pro</h3>
                     <p class="app-tagline">Cash Counter & Bahi Khata</p>
                     <div class="app-rating">
@@ -385,16 +385,21 @@
                 </div>
                 <div class="app-body">
                     <p class="app-desc">
-                        The fastest way to count cash notes. Supports INR, USD, EUR, GBP, BDT & NPR
-                        with professional receipt generation and customer ledger management.
+                        The all-in-one cash management app for shopkeepers. Count cash notes instantly,
+                        manage khata ledger, generate bills, send reminders, and access 8+ calculators
+                        — with In-App Purchase premium upgrade.
                     </p>
                     <div class="features-list">
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">💱</div><span class="feature-text">Multi-currency denomination counter</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📖</div><span class="feature-text">Bahi Khata book with customer management</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📄</div><span class="feature-text">PDF & Image receipt sharing</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">💾</div><span class="feature-text">Data backup & restore (JSON)</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">💬</div><span class="feature-text">WhatsApp payment reminders</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-note">📱</div><span class="feature-text">In-app update system</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">💱</div><span class="feature-text">Multi-currency note counter (INR + 6 world currencies)</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📖</div><span class="feature-text">Digital Khata ledger with udhaar tracking</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📄</div><span class="feature-text">Billing & invoice maker + PDF share</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">🧮</div><span class="feature-text">8+ calculators (GST, EMI, Scientific, Programmer, Date)</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📸</div><span class="feature-text">Scan & Calculate — handwritten bill OCR</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📲</div><span class="feature-text">Smart Pay — UPI QR scan, generate, send money</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">📊</div><span class="feature-text">Reports dashboard + smart insights</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">☁️</div><span class="feature-text">Google Drive cloud backup & restore</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">💬</div><span class="feature-text">WhatsApp payment reminders + Refer & Earn</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-note">🔐</div><span class="feature-text">App Lock (biometric) + Premium IAP upgrade</span></div>
                     </div>
                     <div class="app-download">
                         <a href="https://play.google.com/store/apps/details?id=com.lokhnathtechnical.notecounterpro" target="_blank" class="download-btn">
@@ -408,26 +413,29 @@
             <!-- ExamVault -->
             <div class="app-card">
                 <div class="app-card-header">
-                    <div class="app-icon-large app-icon-exam">📊</div>
+                    <div class="app-icon-large app-icon-exam" role="img" aria-label="ExamVault app icon"></div>
                     <h3 class="app-name">ExamVault</h3>
-                    <p class="app-tagline">MCQ Mock Test Platform</p>
+                    <p class="app-tagline">Mock Test App for Indian Exams</p>
                     <div class="app-rating">
                         <span class="stars">★★★★★</span>
-                        <span class="rating-text">Free • 1000+ Mock Tests</span>
+                        <span class="rating-text">Free • SSC, UPSC, APSC, ADRE, Banking</span>
                     </div>
                 </div>
                 <div class="app-body">
                     <p class="app-desc">
-                        India's smartest MCQ mock test platform for competitive exam preparation.
-                        SSC, UPSC, APSC, ADRE, Banking, Railway & all state exams — with daily quizzes.
+                        Independent educational practice app for Indian competitive exams.
+                        Mock tests for SSC, UPSC, APSC, ADRE, Railway, Banking & state exams —
+                        with daily quizzes, leaderboard, and bilingual support (English + অসমীয়া).
                     </p>
                     <div class="features-list">
                         <div class="feature-item"><div class="feature-icon feature-icon-exam">📝</div><span class="feature-text">1000+ Mock Tests (SSC, UPSC, Banking, Railway)</span></div>
                         <div class="feature-item"><div class="feature-icon feature-icon-exam">🅰️</div><span class="feature-text">APSC, ADRE, TET — অসমীয়া ভাষা সমৰ্থিত</span></div>
                         <div class="feature-item"><div class="feature-icon feature-icon-exam">📅</div><span class="feature-text">Daily Quiz with streak tracking</span></div>
                         <div class="feature-item"><div class="feature-icon feature-icon-exam">🏆</div><span class="feature-text">Leaderboard & Performance Analysis</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📰</div><span class="feature-text">Current Affairs & Exam Notifications</span></div>
-                        <div class="feature-item"><div class="feature-icon feature-icon-exam">💎</div><span class="feature-text">Premium: Ad-free + Unlimited Tests</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">📰</div><span class="feature-text">Current Affairs & Government Source links</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔔</div><span class="feature-text">Exam notifications & announcements</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">🔍</div><span class="feature-text">Search tests by exam, subject, language</span></div>
+                        <div class="feature-item"><div class="feature-icon feature-icon-exam">💎</div><span class="feature-text">Premium: Ad-free + Unlimited mock tests</span></div>
                     </div>
                     <div class="app-download">
                         <a href="https://play.google.com/store/apps/details?id=com.examvault.education" target="_blank" class="download-btn">
@@ -461,43 +469,51 @@
 
         <div class="announcements-list">
             <div class="announcement-item">
-                <div class="announcement-type type-new">🆕</div>
+                <div class="announcement-type type-new">🎨</div>
                 <div class="announcement-info">
-                    <h4>ExamVault v1.56 — Real Ads + In-App Update</h4>
-                    <p>Real AdMob ads now active. Premium users get ad-free experience. In-app update system added. Bug fix: ads not showing after login. Bug fix: app crash during tests.</p>
-                    <div class="announcement-date">Oct 12, 2026</div>
-                </div>
-            </div>
-            <div class="announcement-item">
-                <div class="announcement-type type-feature">🎯</div>
-                <div class="announcement-info">
-                    <h4>Assam A-Z Exam Data Added</h4>
-                    <p>New categories: Assam CGL, Grade-B JLGB, Forest Department. Daily quizzes: Assam History & Geography. 7 upcoming exams, 5 current affairs, 3 new banners, 4 announcements.</p>
-                    <div class="announcement-date">Oct 12, 2026</div>
+                    <h4>Note Counter Pro v3.58.1 — New App Icon & IAP Live</h4>
+                    <p>Fresh cash counter machine icon, Google Play Billing 9.1.0 (Play Store policy compliant), 16 KB page size support, trader status declared, 3-language Play Store listing (en/bn/hi).</p>
+                    <div class="announcement-date">Nov 8, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
                 <div class="announcement-type type-update">📱</div>
                 <div class="announcement-info">
-                    <h4>Note Counter Pro v3.13 — All Features Restored</h4>
-                    <p>Name/Note dialog, receipt sharing as image, history button, QR code history with image, delete options, business details, professional PDF, settle up bug fix, all customers visible.</p>
-                    <div class="announcement-date">Oct 12, 2026</div>
+                    <h4>ExamVault v1.62.3 — Target API 36 + Billing 8.1.0</h4>
+                    <p>Android 16 (API 36) compliance, Google Play Billing Library 8.1.0 for policy compliance, in-app update system with hybrid approach, splash screen disclaimer, government sources screen.</p>
+                    <div class="announcement-date">Nov 8, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
-                <div class="announcement-type type-feature">📄</div>
+                <div class="announcement-type type-feature">📊</div>
                 <div class="announcement-info">
-                    <h4>Professional PDF Sharing</h4>
-                    <p>Khata summary PDF and customer statement PDF now available with business details, payment QR code, and professional maroon-gold design.</p>
-                    <div class="announcement-date">Oct 12, 2026</div>
+                    <h4>Note Counter Pro v3.54 — Reports Dashboard + Smart Insights</h4>
+                    <p>Reports dashboard with weekly charts, smart insights, Backup Pro templates, professional dialog redesign, WhatsApp sharing + onboarding welcome flow.</p>
+                    <div class="announcement-date">Nov 4, 2026</div>
                 </div>
             </div>
             <div class="announcement-item">
-                <div class="announcement-type type-update">💾</div>
+                <div class="announcement-type type-feature">📸</div>
                 <div class="announcement-info">
-                    <h4>Data Backup & Restore System</h4>
-                    <p>Note Counter Pro now has full JSON backup/restore. Auto local backup after every change. Manual backup to WhatsApp/Email. Versioned format with migration support.</p>
-                    <div class="announcement-date">Oct 11, 2026</div>
+                    <h4>Scan & Calculate — Cloud Vision OCR</h4>
+                    <p>Handwritten bill OCR with 95% accuracy using Google ML Kit. Scan a bill, automatically extract denominations, edit and add manual entries, get column sum.</p>
+                    <div class="announcement-date">Oct 28, 2026</div>
+                </div>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-type type-update">📲</div>
+                <div class="announcement-info">
+                    <h4>Smart Pay — UPI QR Tools</h4>
+                    <p>UPI QR scanner, QR generator, send money screen, saved UPI IDs. Scan merchant QR to extract UPI ID and send up to ₹1,00,000 (vs ₹2,000 gallery limit).</p>
+                    <div class="announcement-date">Oct 22, 2026</div>
+                </div>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-type type-update">🧮</div>
+                <div class="announcement-info">
+                    <h4>Calculator Suite — 8+ Calculators</h4>
+                    <p>Standard, Scientific, Programmer, Date, GST, EMI, Currency Converter — all in one Tools tab. Live result preview + bigger buttons + trailing operator fix.</p>
+                    <div class="announcement-date">Oct 18, 2026</div>
                 </div>
             </div>
         </div>
